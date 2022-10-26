@@ -14,6 +14,33 @@ import (
 	"github.com/gorilla/mux"
 )
 
+type Block struct {
+	Position  int
+	Data      SongCheckout
+	TimeStamp string
+	Hash      string
+	PrevHash  string
+}
+
+type SongCheckout struct {
+	SongID       string `json:"song_id"`
+	User         string `json:"user"`
+	CheckoutDate string `json:"checkout_date"`
+	IsGenesis    bool   `jsons:"is_genesis"`
+}
+
+type Song struct {
+	ID          string `json:"id"`
+	Title       string `json:"title"`
+	Artist      string `json:"artist"`
+	ReleaseDate string `json:"release_date"`
+	SKU         string `json:"sku"`
+}
+
+type Blockchain struct {
+	blocks []*Block
+}
+
 func (b *Block) generateHash() {
 	bytes, _ := json.Marshal(b.Data)
 
